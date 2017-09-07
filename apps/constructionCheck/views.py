@@ -18,10 +18,9 @@ def index(request):
 
 def create(request):
     print "Inside the create method"
-
     if request.method == 'POST':     #Validates that only POST data is received
         form_data = request.POST
-        check = User.objects.validate_reg(form_data)     #Stores the validate function from models, contains error list
+        check = User.objects.validate_reg(form_data)
         if check != []:     #If there are errors, redirect to homepage
             print check
             return redirect('/')
@@ -40,13 +39,12 @@ def create(request):
 def success(request):
     print "Inside the success method"
     if 'user_id' in request.session:
-        user_id = request.session['user_id'] #store the user id from sessions in a variable
-        current_user = User.objects.get(id=user_id)
+        current_user = get_current_user(request)
 
         context = {
-            'name': current_user.first_name
+            'first_name': current_user.first_name
         }
-        return render(request, 'login_and_registration_app/success.html', context)
+        return render(request, 'constructionCheck/success.html', context)
     return redirect('/')
 
 def login(request):
@@ -57,7 +55,7 @@ def login(request):
 
         if type(check) == type(User()):
             return redirect('/success')
-        print check #You need to make sure the login makes it to the success page
+        print check
     return redirect('/')
 
 
