@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Index Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'constructionCheck/css/index.css' %}" media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+    <h1>Hello {{ name }} at {{ email }}</h1>
+
+    <form action="/house/create" method="post">
+      {% csrf_token %}
+      <label>Address of new house:</label>
+      <input type="text" name="address" />
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>

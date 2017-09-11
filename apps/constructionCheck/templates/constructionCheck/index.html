@@ -2,18 +2,65 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Index Page</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'constructionCheck/css/index.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Login/Registration</title>
   </head>
   <body>
-    <h1>Hello {{ name }} at {{ email }}</h1>
+    {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
 
-    <form action="/house/create" method="post">
-      {% csrf_token %}
-      <label>Address of new house:</label>
-      <input type="text" name="address" />
-      <input type="submit" value="Submit">
-    </form>
+    <!-- Start Registration Form -->
+    <fieldset>
+      <legend>Register</legend>
+      <form action="/createUser" method="post">
+        {% csrf_token %}
+
+        <label>First Name</label>
+        <div>
+          <input type="text" name="first_name">
+        </div>
+
+        <label>Last Name</label>
+        <div>
+          <input type="text" name="last_name">
+        </div>
+
+        <label>Email</label>
+        <div>
+          <input type="email" name="email">
+        </div>
+
+        <label>Password</label>
+        <div>
+          <input type="password" name="password">
+        </div>
+        <input type="submit" value="Register">
+      </form>
+    </fieldset>
+    <!-- End Registration Form -->
+
+    <!-- Start Login Form -->
+    <fieldset>
+      <legend>Login</legend>
+      <form action="/login" method="post">
+        {% csrf_token %}
+        <label>Email</label>
+        <div>
+          <input type="email" name="email">
+        </div>
+
+        <label>Password</label>
+        <div>
+          <input type="password" name="password">
+        </div>
+
+        <input type="submit" value="Login">
+      </form>
+    </fieldset>
+    <!-- End Login Form -->
   </body>
 </html>
