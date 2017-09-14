@@ -39,7 +39,7 @@ def createUser(request):
 def success(request):
     print "Inside the success method"
     if 'user_id' in request.session:
-        current_user = get_current_user(request)
+        current_user = getCurrentUser(request)
 
         context = {
             'first_name': current_user.first_name

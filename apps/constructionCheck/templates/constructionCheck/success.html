@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="{% static 'constructionCheck/css/index.css' %}" media="screen" title="no title"  charset="utf-8">
   </head>
   <body>
-    <h1>Hello {{ name }} at {{ email }}</h1>
+    <!-- <h1>Hello {{ current_user.first_name }} at {{ current_user.email }}</h1> -->
 
-    <form action="/house/create" method="post">
+    <form action="/createHouse" method="post">
       {% csrf_token %}
       <label>Address of new house:</label>
       <input type="text" name="address" />
