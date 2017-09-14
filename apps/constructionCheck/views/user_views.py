@@ -8,37 +8,16 @@ def flashErrors(request, errors):
         messages.error(request, error)
 
 def getCurrentUser(request):
-    user_id = request.session['user_id']
-    current_user = User.objects.get(id=user_id)
+    current_user = User.objects.get(id= request.session['user_id'])
     return current_user
 
 def index(request):
     print "Inside the index method"
     return render(request, 'constructionCheck/index.html')
 
-def createUser(request):
-    print "Inside the create method"
-    if request.method == 'POST':     #Validates that only POST data is received
-        form_data = request.POST
-        check = User.objects.validate_reg(form_data)
-        if check != []:     #If there are errors, redirect to homepage
-            print check
-            return redirect('/')
-        else:
-            user = User.objects.create(
-            first_name = form_data['first_name'],
-            last_name = form_data['last_name'],
-            email = form_data['email'],
-            password = form_data['password']
-            )
-            request.session['user_id'] = user.id
-            print user
-        print check
-    return redirect('/success')
-
 def success(request):
-    print "Inside the success method"
     if 'user_id' in request.session:
+        print "Inside the success method"
         current_user = getCurrentUser(request)
 
         context = {
@@ -58,7 +37,43 @@ def login(request):
         print check
     return redirect('/')
 
-
 def logout(request):
     request.session.pop('user_id')
     return redirect('/')
+
+def getUsers(request):
+    if 'user_id' in request.session:
+        print "Inside the getUsers method"
+        users = User.objects.all()
+
+        context = {
+            'users': users
+        }
+        return render(request, 'constructionCheck/getUsers.html', context)
+    return redirect('/')
+
+def createUser(request):
+    print "Inside the create method"
+    if request.method == 'POST':
+        form_data = request.POST
+        check = User.objects.validate_reg(form_data)
+        if check != []:
+            print check
+            return redirect('/')
+        else:
+            user = User.objects.create(
+            first_name = form_data['first_name'],
+            last_name = form_data['last_name'],
+            email = form_data['email'],
+            password = form_data['password']
+            )
+            request.session['user_id'] = user.id
+            print user
+            print check
+    return redirect('/success')
+
+def showUser(request, id):
+    pass
+
+def updateUser(request):
+    pass
