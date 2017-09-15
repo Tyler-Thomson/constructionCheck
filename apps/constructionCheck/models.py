@@ -49,7 +49,7 @@ class User(models.Model):
     def __str__(self):
         string_output = " ID: {} First name: {} Last name: {} Email: {} Password: {}"
         return string_output.format(
-        self.id,     #Include id if you want to fetch it (you usually do) - django creates it for you
+        self.id,
         self.first_name,
         self.last_name,
         self.email,
@@ -57,3 +57,50 @@ class User(models.Model):
     )
 
     objects = UserManager()
+
+class Section(models.Model):
+    name = models.Charfield(max_length=45)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        string_output = " ID: {} Name: {}"
+        return string_output.format(
+        self.id,
+        self.name,
+    )
+
+class Checklist(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class House(models.Model):
+    address = models.Charfield(max_length=100)
+    city = models.Charfield(max_length=45)
+    user = models.ForeignKey(User, related_name = "houses")
+    checklist = models.OneToOneField(House, related_name = "house")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        string_output = " ID: {} Address: {} City: {} User: {}"
+        return string_output.format(
+        self.id,
+        self.address,
+        self.city,
+        self.user,
+    )
+
+class Check(models.Model):
+    check = models.Charfield(max_length=45)
+    checklist = models.ForeignKey(Checklist, related_name = "items")
+    section = models.ForeignKey(User, related_name = "items")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        string_output = " ID: {} Item: {}"
+        return string_output.format(
+        self.id,
+        self.item,
+    )
