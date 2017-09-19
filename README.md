@@ -1,7 +1,7 @@
 Construction Check
 ==================
 
-Construction Check is a Web application I am developing to experiment and utilize Django (and eventually Angular2 and maybe React).
+Construction Check is a Web application I am developing to experiment and utilize Django (and eventually Angular2 or ReactJS).
 
 I have broken the views file into composite pieces contained within a views directory, to modularize the methods. After inital development, I will probably modularize things further and make each model and its related files into their own apps within the Django project.
 
