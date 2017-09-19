@@ -2,3 +2,4 @@ env
 *.DS_Store
 *.pyc
 _pycache_
+node_modules
