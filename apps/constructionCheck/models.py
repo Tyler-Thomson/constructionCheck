@@ -59,7 +59,7 @@ class User(models.Model):
     objects = UserManager()
 
 class Section(models.Model):
-    name = models.Charfield(max_length=45)
+    name = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -75,10 +75,10 @@ class Checklist(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class House(models.Model):
-    address = models.Charfield(max_length=100)
-    city = models.Charfield(max_length=45)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=45)
     user = models.ForeignKey(User, related_name = "houses")
-    checklist = models.OneToOneField(House, related_name = "house")
+    checklist = models.OneToOneField(Checklist, related_name = "house")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -92,9 +92,9 @@ class House(models.Model):
     )
 
 class Check(models.Model):
-    check = models.Charfield(max_length=45)
-    checklist = models.ForeignKey(Checklist, related_name = "items")
-    section = models.ForeignKey(User, related_name = "items")
+    title = models.CharField(max_length=45)
+    checklist = models.ForeignKey(Checklist, related_name = "checks")
+    section = models.ForeignKey(Section, related_name = "checks")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
