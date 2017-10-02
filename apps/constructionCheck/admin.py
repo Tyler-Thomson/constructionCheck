@@ -4,12 +4,12 @@ from django.contrib import admin
 from . models import User, House, Section, Checklist, Check
 
 class UserModel(admin.ModelAdmin):
-    list_display = ["first_name", "last_name", "email", "password",
+    list_display = ["username", "email", "password",
                                         "updated_at", "created_at"]
-    list_display_links = ["first_name"]
-    list_filter = ["first_name"]
-    list_editable = ["last_name", "email", "password"]
-    search_fields = ["first_name"]
+    list_display_links = ["username"]
+    list_filter = ["username"]
+    list_editable = ["email", "password"]
+    search_fields = ["username"]
 
     class Meta:
         model = User

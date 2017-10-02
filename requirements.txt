@@ -8,6 +8,7 @@ decorator==4.1.2
 Django==1.11.4
 django-extensions==1.9.1
 djangorestframework==3.6.4
+djangorestframework-jwt==1.11.0
 enum34==1.1.6
 httpie==0.9.9
 idna==2.6
@@ -20,6 +21,7 @@ prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 pycparser==2.18
 Pygments==2.2.0
+PyJWT==1.5.3
 pytz==2017.2
 requests==2.18.4
 scandir==1.5
