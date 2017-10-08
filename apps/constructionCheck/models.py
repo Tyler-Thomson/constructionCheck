@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class UserManager(BaseUserManager):
     # def validate_reg(self, form_data):
@@ -38,7 +37,6 @@ class UserManager(BaseUserManager):
     #                 return user
     #
     #         errors.append('Invalid email/password')
-
         # return errors
 
     class User(AbstractBaseUser):
@@ -55,17 +53,15 @@ class UserManager(BaseUserManager):
 
 
         def __str__(self):
-            string_output = " ID: {} First name: {} Last name: {} Username: {} Email: {} Password: {}"
+            string_output = " ID: {} First name: {} Last name: {} Email: {} Password: {}"
             return string_output.format(
             self.id,
             self.first_name,
             self.last_name,
-            self.username,
             self.email,
             self.password,
-        )
-
-        objects = UserManager()
+            )
+objects = UserManager()
 
 class Section(models.Model):
     name = models.CharField(max_length=45)
