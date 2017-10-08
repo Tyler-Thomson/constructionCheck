@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
+from django.conf import settings
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager
 
-class UserManager(models.Manager):
+class UserManager(BaseUserManager):
     # def validate_reg(self, form_data):
     #     errors = []
     #     if len(form_data['first_name']) < 2:
@@ -25,7 +27,7 @@ class UserManager(models.Manager):
     #     if len(form_data['password']) < 8:
     #         errors.append("Password must contain at least eight characters")
     #     return errors
-    #
+
     # def authenticate(self, form_data):
     #     errors = self.validate_login(form_data)
     #
@@ -36,27 +38,34 @@ class UserManager(models.Manager):
     #                 return user
     #
     #         errors.append('Invalid email/password')
-    #
-    #     return errors
 
-class User(models.Model):
-    username = models.CharField(max_length=45)
-    email = models.EmailField(max_length=45)
-    password = models.CharField(max_length=45)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+        # return errors
 
-    def __str__(self):
-        string_output = " ID: {} First name: {} Last name: {} Email: {} Password: {}"
-        return string_output.format(
-        self.id,
-        self.first_name,
-        self.last_name,
-        self.email,
-        self.password,
-    )
+    class User(AbstractBaseUser):
+        first_name = models.CharField(max_length=45)
+        last_name = models.CharField(max_length=45)
+        email = models.EmailField(max_length=45, unique = True)
+        password = models.CharField(max_length=45)
+        created_at = models.DateTimeField(auto_now_add=True)
+        updated_at = models.DateTimeField(auto_now=True)
 
-    objects = UserManager()
+        USERNAME_FIELD = 'email'
+
+        REQUIRED_FIELDS = ["first_name", "last_name"]
+
+
+        def __str__(self):
+            string_output = " ID: {} First name: {} Last name: {} Username: {} Email: {} Password: {}"
+            return string_output.format(
+            self.id,
+            self.first_name,
+            self.last_name,
+            self.username,
+            self.email,
+            self.password,
+        )
+
+        objects = UserManager()
 
 class Section(models.Model):
     name = models.CharField(max_length=45)
@@ -77,7 +86,7 @@ class Checklist(models.Model):
 class House(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=45)
-    user = models.ForeignKey(User, related_name = "houses")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "houses")
     checklist = models.OneToOneField(Checklist, related_name = "house")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
