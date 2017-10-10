@@ -11,5 +11,6 @@ urlpatterns = [
     # url(r'^$', views.login, name='login'),
     # url(r'^profile/$', views.profile, name='profile'),
 
+    #This should employ django-restful's default login/logout urls
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
