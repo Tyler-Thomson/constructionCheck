@@ -1,8 +1,8 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model #Required b/c custom User model
 from models import *
 from rest_framework import serializers
 
-User = get_user_model()
+User = get_user_model()#Required b/c custom User model
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

@@ -8,6 +8,7 @@ from rest_framework_simplejwt.views import (
 
 #Login URLs for browsable API
 urlpatterns = [
+    #Might need these later, so keeping them for the moment
     # url(r'^$', views.login, name='login'),
     # url(r'^profile/$', views.profile, name='profile'),
 
