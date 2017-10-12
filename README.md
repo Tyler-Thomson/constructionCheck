@@ -2,11 +2,12 @@ Construction Check
 ==================
 
 Construction Check is a Web application I am developing to experiment and utilize Django (and eventually Angular2 or ReactJS).
+Django is being used to serve APIs, and will communicate with Angular.
+I've implemented the Django-restful framework, and have been learning to use it, along with JWT (using simplejwt).
 
-I have broken the views file into composite pieces contained within a views directory, to modularize the methods. After inital development, I will probably modularize things further and make each model and its related files into their own apps within the Django project.
+This is an app that will function as a checklist for custom houses, with general templates for the user to use and customize.
 
 Goals for now:
-* Make all the models
-* Make all the views for basic CRUD operations for the models
-* Make all needed urls
-* Get basic rendering with HTML. Once back end is completed, implement Angular2 on front end
+* Finish implementing built-in Django authentication
+* Finish implementing JWT to secure communications between the backend and front end.
+* Make sure all models are communicating as they should be
