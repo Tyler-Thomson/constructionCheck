@@ -27,7 +27,6 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password, first_name, last_name):
         user = self.create_user(email, password, first_name, last_name)
         user.is_admin = True
-        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -54,6 +53,21 @@ class User(AbstractBaseUser):
 
     def get_short_name(self):
         return self.first_name
+
+    #Does the user have a specific permission?
+    # Simplest possible answer: Yes, always
+    def has_perms(self, perm, obj=None):
+        return True
+
+    #Does the user have permissions to view the app `app_label`?
+    # Simplest possible answer: Yes, always
+    def has_module_perms(self, app_label):
+        return True
+
+    #Is the user a member of staff?
+    # Simplest possible answer: All admins are staff
+    def is_staff(self):
+        return self.is_admin
 
     def __str__(self):
         string_output = " ID: {} Email: {} Password: {} Active: {} Admin: {}"

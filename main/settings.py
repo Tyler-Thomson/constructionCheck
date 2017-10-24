@@ -33,6 +33,10 @@ AUTH_USER_MODEL = 'constructionCheck.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.constructionCheck',
+    'apps.core',
+    'rest_framework',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,10 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-
-    'apps.constructionCheck',
-    'apps.core',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -58,14 +58,15 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAdminUser',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         # 'rest_framework.permissions.IsAuthenticated',
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework.authentication.BasicAuthentication',
     'rest_framework.authentication.SessionAuthentication',
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
@@ -146,10 +147,10 @@ USE_TZ = True
 #Static files (CSS, JavaScript, Images)
 #https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-ANGULAR_DIR = os.path.join(BASE_DIR, 'apps/constructionCheck/templates/dist')
-
-STATICFILES_DIRS = [
-    os.path.join(ANGULAR_DIR)
-]
+# ANGULAR_DIR = os.path.join(BASE_DIR, 'apps/constructionCheck/templates/dist')
+#
+# STATICFILES_DIRS = [
+#     os.path.join(ANGULAR_DIR)
+# ]
 
 STATIC_URL = '/static/'

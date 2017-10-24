@@ -13,15 +13,15 @@ schema_view = get_schema_view(title='Construction API')
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'houses', views.HouseViewSet)
-router.register(r'checklist', views.ChecklistViewSet)
-router.register(r'section', views.SectionViewSet)
-router.register(r'check', views.CheckViewSet)
+router.register(r'checklists', views.ChecklistViewSet)
+router.register(r'sections', views.SectionViewSet)
+router.register(r'checks', views.CheckViewSet)
 
 #Login URLs for browsable API
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    url(r'^api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh' ),
+    # url(r'^api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # url(r'^api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh' ),
     url(r'^schema/$', schema_view),
 ]
