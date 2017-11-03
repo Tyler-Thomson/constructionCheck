@@ -85,7 +85,7 @@ class Section(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        string_output = " ID: {} Name: {}"
+        string_output = " Name: {}"
         return string_output.format(
         self.id,
         self.name,
@@ -112,7 +112,6 @@ class House(models.Model):
         self.address,
         self.city,
         self.user,
-        self.checklist,
     )
 
 class Check(models.Model):
