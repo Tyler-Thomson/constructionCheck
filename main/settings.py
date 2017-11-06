@@ -34,7 +34,6 @@ AUTH_USER_MODEL = 'constructionCheck.User'
 
 INSTALLED_APPS = [
     'apps.constructionCheck',
-    'apps.core',
     'rest_framework',
 
     'django.contrib.admin',

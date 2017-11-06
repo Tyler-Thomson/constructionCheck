@@ -12,7 +12,7 @@ schema_view = get_schema_view(title='Construction API')
 
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
-router.register(r'houses', views.HouseViewSet)
+router.register(r'states', views.StateViewSet)
 router.register(r'checklists', views.ChecklistViewSet)
 router.register(r'sections', views.SectionViewSet)
 router.register(r'checks', views.CheckViewSet)

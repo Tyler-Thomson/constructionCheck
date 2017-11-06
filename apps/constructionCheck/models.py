@@ -79,53 +79,47 @@ class User(AbstractBaseUser):
         self.is_admin,
         )
 
+class State(models.Model):
+    state = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.state
+
+class Checklist(models.Model):
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=45)
+    zipcode = models.IntegerField()
+    state = models.ForeignKey(State, related_name="houses")
+    manager = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "checklists")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.address
+
 class Section(models.Model):
     name = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        string_output = " Name: {}"
+        string_output = "{}"
         return string_output.format(
-        self.id,
         self.name,
     )
 
-class Checklist(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class House(models.Model):
-    address = models.CharField(max_length=100)
-    city = models.CharField(max_length=45)
-    zipcode = models.IntegerField()
-    state = models.CharField(max_length=20)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "houses")
-    checklist = models.OneToOneField(Checklist, related_name = "house")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        string_output = " ID: {} Address: {} City: {} User: {}"
-        return string_output.format(
-        self.id,
-        self.address,
-        self.city,
-        self.user,
-    )
-
 class Check(models.Model):
-    title = models.CharField(max_length=45)
+    check = models.CharField(max_length=45)
     checklist = models.ForeignKey(Checklist, related_name = "checks")
     section = models.ForeignKey(Section, related_name = "checks")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        string_output = " ID: {} Item: {}"
+        string_output = " Check: {}"
         return string_output.format(
-        self.id,
-        self.title,
-        self.checklist,
-        self.section,
+        self.check,
+        # self.section.name
     )
