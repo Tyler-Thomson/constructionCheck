@@ -92,7 +92,7 @@ class Checklist(models.Model):
     city = models.CharField(max_length=45)
     zipcode = models.IntegerField()
     state = models.ForeignKey(State, related_name="houses")
-    manager = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "checklists")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "checklists")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
