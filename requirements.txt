@@ -10,7 +10,7 @@ django-extensions==1.9.1
 djangorestframework==3.6.4
 djangorestframework-jwt==1.11.0
 enum34==1.1.6
-httpie==0.9.9
+httpie==3.1.0
 idna==2.6
 ipython==5.4.1
 ipython-genutils==0.2.0
